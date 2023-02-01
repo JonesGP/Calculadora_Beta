@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=7">
+    <meta name="description" content="Calculadora simples">
+    <title>Calculadora</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="main">
+        <div class="cal-simple">
+            <div class="cont-cal-simple">
+                <div class="result-container"><p class="result" id="resultado"></p></div>
+                <table class="table-bt-cal-simple">
+                    <tr>
+                        <td><button class="btn bt-cal-simp-ac" onclick="clean()">AC</button></td>
+                        <td><button class="btn bt-cal-simp-cin"onclick="cinstyle()">CIN</button></td>
+                        <td><button class="btn bt-cal-simp-del" onclick="del()"><img src="/icons/delete-left-solid.svg" alt="delete button"></button></td>
+                        <td><button class="btn bt-cal-simp-div bt-cal-simp-special"onclick="insert('/')"><img src="/icons/divide-solid.svg" alt="divide button"></button></td>
+                        <td cin-calc><button class="btn"><img src="/icons/square-root-variable-solid.svg" alt="equare-root-icon"></button></td>
+                    </tr>
+                    <tr>
+                        <td><button class="btn bt-cal-simp-7" onclick="insert('7')">7</button></td>
+                        <td><button class="btn bt-cal-simp-8" onclick="insert('8')">8</button></td>
+                        <td><button class="btn bt-cal-simp-9" onclick="insert('9')">9</button></td>
+                        <td><button class="btn bt-cal-simp-xmark bt-cal-simp-special" onclick="insert('*')"><img src="/icons/xmark-solid.svg" alt="xmark button"></button></td>
+                        <td cin-calc><button class="btn" onclick="insertparenteses('()')">()</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class="btn bt-cal-simp-4" onclick="insert('4')">4</button></td>
+                        <td><button class="btn bt-cal-simp-5" onclick="insert('5')">5</button></td>
+                        <td><button class="btn bt-cal-simp-6" onclick="insert('6')">6</button></td>
+                        <td><button class="btn bt-cal-simp-minus bt-cal-simp-special" onclick="insert('-')"><img src="/icons/minus-solid.svg" alt="minus button"></button></td>
+                        <td cin-calc><button class="btn" onclick="insert('%')">%</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class="btn bt-cal-simp-1" onclick="insert('1')">1</button></td>
+                        <td><button class="btn bt-cal-simp-2" onclick="insert('2')">2</button></td>
+                        <td><button class="btn bt-cal-simp-3" onclick="insert('3')">3</button></td>
+                        <td><button class="btn bt-cal-simp-plus bt-cal-simp-special" onclick="insert('+')"><img src="/icons/plus-solid.svg" alt="plus button"></button></td>
+                        <td cin-calc><button class="btn"><img src="/icons/PI.png" alt="PI-icon"></button></td>
+                    </tr>
+                    <tr>
+                        <td><button class="btn bt-cal-simp-0" onclick="insert('0')">0</button></td>
+                        <td><button class="btn bt-cal-simp-." onclick="insert('.')">.</button></td>
+                        <td colspan="2"><button class="btn bt-cal-simp-equals bt-cal-simp-special" onclick="igual()"><img src="/icons/equals-solid.svg" alt="equals button"></button></td>
+                        <td cin-calc><button class="btn"><img src="/icons/up.png" alt="up-icon"></button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="complete-calculater">
+            <div class="cont-cal-compl">
+
+            </div>
+        </div>
+    </main>
+    <script src="/script.js"></script>
+</body>
+</html>
