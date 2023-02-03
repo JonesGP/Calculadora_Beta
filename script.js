@@ -101,12 +101,20 @@ function clean() {
     result.innerHTML = res.substring(0,res.length - 1)
     temp = []
     temp_no_space = []
+    quant_paren_closed = 0
+    quant_paren_open = 0
 }
 
 function del(){
+    if (temp.substring(temp.length-1) == ')') {
+        quant_paren_closed -= 1
+    }else if (temp.substring(temp.length-1) == '(') {
+        quant_paren_open -= 1
+    }
     if ( result.textContent) {
         let res             = document.getElementById('resultado').innerHTML
         result.innerHTML    = res.substring(0, res.length -1);
         temp                = temp.substring(0, temp.length -1)
     }
+    
 }
