@@ -111,7 +111,9 @@ function del(){
     }else if (temp.substring(temp.length-1) == '(') {
         quant_paren_open -= 1
     }
-    if ( result.textContent) {
+    if (temp.substring(temp.length - 1) == ' ') {
+        temp = temp.substring(0, temp.length - 2)
+    }else if( result.textContent) {
         let res             = document.getElementById('resultado').innerHTML
         result.innerHTML    = res.substring(0, res.length -1);
         temp                = temp.substring(0, temp.length -1)
