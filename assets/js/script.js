@@ -3,6 +3,8 @@ let equals = document.querySelector('.bt-cal-simp-equals')
 let list_numbers = []
 let temp = []
 let temp_no_space = []
+let perc = '%'
+let expo_value = ''
 
 let quant_paren_open = 0
 let quant_paren_closed = 0
@@ -22,10 +24,15 @@ function insert( valor ) {
 
 
 function igual() {
+    if ((temp.indexOf('(') != -1) || temp.indexOf(')') != -1){
+        calc_parentheses()
+    }
+    if (temp.indexOf('^') != -1){
+        elevate()
+    }
     while(temp.indexOf('%') != -1){
         percentage()
     }
-    calc_parentheses()
     console.log(temp)
     document.getElementById('resultado').innerHTML = eval(temp)
 }
@@ -48,6 +55,9 @@ function calc_parentheses(){
     let paren_open_index = temp.lastIndexOf('(', temp.length) + 1
     let paren_closed_idex = temp.indexOf(')', paren_open_index)
     let paren_value = temp.substring(paren_open_index, paren_closed_idex)
+    if(paren_value.indexOf('^')){
+        elevate()
+    }
     if(paren_value.indexOf('%')){
         percentage()
     }
@@ -75,8 +85,29 @@ function percentage() {
         temp = temp.replace(temp.substring(prox_space_value_index+1, per_index_final)+'%', result_prox_value_with_perc.toFixed(14))
     }else{
         per_result = (per_value / 100)
-        temp = temp.replace((temp.substring(per_first_space_index + 1, per_index_final)+'%').toString(), per_result.toFixed(14))
+        temp = temp.replace((betw_perc + ' ' + (temp.substring(per_first_space_index + 1, per_index_final)+'%')).toString(), per_result.toFixed(14))
     }
+}
+
+function elevate(){
+    let value = temp.substring(temp.lastIndexOf(' ' , temp.indexOf('^')), temp.indexOf('^'))
+    if (value.indexOf('(') != -1){
+        value = value.substring(1, value.length)
+    }
+    console.log(value)
+    if ( temp.indexOf(' ', temp.indexOf('^')) != -1) {
+        expo_value = temp.substring(temp.indexOf('^') + 1, temp.indexOf(' ', temp.indexOf('^')))
+    }else{
+        expo_value = temp.substring(temp.indexOf('^') + 1, temp.length)
+    }
+    console.log(expo_value)
+    if (expo_value.indexOf(')') != -1){
+        expo_value = expo_value.substring(0, expo_value.length - 1)
+    }
+    console.log(expo_value)
+    console.log(value)
+    const elevate_result = Math.pow(parseFloat(value), parseFloat(expo_value))
+    temp = temp.replace(value.toString() + '^' + expo_value, elevate_result.toString())
 }
 
 function cinstyle() {

@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+:root{
+    --body-background-color: linear-gradient(#2196f3, red);
+    --calc-background-color: transparent;
+    --keys-background-color: transparent;
+    --hover-keys-color: rgba(255,255,255,0.1);
+    --ac-key-color: transparent;
+    --ac-hover-key: rgba(255,255,255,0.1);
+    --special-keys-backgroun-color:transparent;
+    --special-keys-hover: rgba(255,255,255,0.1);
+    --text-color: white;
+    --text-key-color: white;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--body-background-color);
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.cal-simple {
+    display: flex;
+    background-color: var(--calc-background-color);
+    border-radius: 10px;
+    height: 450px;
+    width: 300px;
+    align-items: center;
+    transition: 0.1s;
+    box-shadow: 0 20px 50px rgba(0,0,0,.15);
+    backdrop-filter: blur(5px);
+    border-top: 1px solid rgba(255,255,255,0.5);
+    border-left: 1px solid rgba(255,255,255,0.5);
+    border-top: 1px solid rgba(255,255,255,0.5);
+    border-top: 1px solid rgba(255,255,255,0.5);
+}
+
+.cont-cal-simple {
+    display: flex;
+    flex-direction: column;
+    padding: 3px;
+    height: 100%;
+    width: 100%;
+}
+
+.result-container {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    height: 30%;
+    color: var(--text-color);
+    font-size: 30px;
+    font-family:'Courier New', Courier, sans-serif;
+    border-top: 2px solid rgba(255,255,255,0.5);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom: 2px solid rgba(255,255,255,0.5);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin: 2px;
+    overflow: hidden;
+}
+.table-bt-cal-simple {
+    height: 100%;
+}
+.table-bt-cal-simple td {
+    width: 20%;
+    height: 20%;
+    border-radius: 10px;
+    padding: 1px;
+}
+.table-bt-cal-simple img {
+    width: 50%;
+    height: 50%;
+}
+.btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    background-color: var(--keys-background-color);
+    border: none;
+    font-size: 100%;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    align-items: center;
+    cursor: pointer;
+    color: var(--text-key-color);
+}
+.btn:hover {
+    background-color: var(--hover-keys-color);
+}
+.bt-cal-simp-ac {
+    background-color: var(--ac-key-color);
+    color: #09ffad;
+}
+.bt-cal-simp-ac:hover{
+    background-color: var(--ac-hover-key);
+}
+.bt-cal-simp-special {
+    background-color: var(--special-keys-backgroun-color);
+}
+.bt-cal-simp-special:hover {
+    background-color: var(--special-keys-hover);
+}
+.bt-cal-simp-equals img{
+    width: 30%;
+}
+.bt-cal-simp-cin:active {
+    color: antiquewhite;
+}
+tr td:last-child{
+    display: table-cell;
+}
+.cin-btn{
+    background-color: var(--special-keys-backgroun-color);
+}
+

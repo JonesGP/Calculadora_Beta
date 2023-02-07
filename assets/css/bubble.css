@@ -1,0 +1,92 @@
+/* ==== bubbles ==== */
+.bubbles{
+    position: absolute;
+    bottom: -100px;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    z-index: -10;
+}
+
+.bubbles span{
+    height: 60px;
+    width: 60px;
+    background: rgba(255,255,255,0.1);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    backdrop-filter: blur(5px);
+    animation: move 10s linear infinite;
+    position: relative;
+    overflow: hidden;
+}
+@keyframes move{
+    100%{
+        transform: translateY(-90vh);
+        
+    }
+}
+.bubbles span.bubble-1{
+    animation-delay: 2.2s;
+    transform: scale(2.15);
+}
+.bubbles span.bubble-2{
+    animation-delay: 3.5s;
+    transform: scale(1.55);
+}
+.bubbles span.bubble-3{
+    animation-delay: 0.2s;
+    transform: scale(0.35);
+}
+.bubbles span.bubble-4{
+    animation-delay: 6s;
+    transform: scale(2.15);
+}
+.bubbles span.bubble-5{
+    animation-delay: 7s;
+    transform: scale(0.5);
+}
+.bubbles span.bubble-6{
+    animation-delay: 4s;
+    transform: scale(2.5);
+}
+.bubbles span.bubble-7{
+    animation-delay: 3s;
+    transform: scale(1.5);
+}
+
+.bubbles span::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 60px;
+    width: 40%;
+    transform: skew(45deg) translateX(150px);
+    background: rgba(255,255,255,0.15);
+    animation: mirror 2s linear infinite;
+}
+
+@keyframes mirror{
+    100%{transform: translateX(-450px);}
+}
+
+.bubbles span.bubble-1:before{
+    animation-delay: 1.5s;
+}
+.bubbles span.bubble-2:before{
+    animation-delay: 3.5s;
+}
+.bubbles span.bubble-3:before{
+    animation-delay: 2.5s;
+}
+.bubbles span.bubble-4:before{
+    animation-delay: 7.5s;
+}
+.bubbles span.bubble-5:before{
+    animation-delay: 4.5s;
+}
+.bubbles span.bubble-6:before{
+    animation-delay: 0.5s;
+}
+.bubbles span.bubble-7:before{
+    animation-delay: 6s;
+}
