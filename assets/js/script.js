@@ -24,17 +24,17 @@ function insert( valor ) {
 
 
 function igual() {
-    if ((temp.indexOf('(') != -1) || temp.indexOf(')') != -1){
-        calc_parentheses()
-    }
     if (temp.indexOf('^') != -1){
         elevate()
     }
-    while(temp.indexOf('%') != -1){
+    if (temp.indexOf('%') != -1){
         percentage()
     }
-    console.log(temp)
-    document.getElementById('resultado').innerHTML = eval(temp)
+    if ((temp.indexOf('(') != -1) || temp.indexOf(')') != -1){
+        calc_parentheses()
+    }
+    temp = eval(temp)
+    document.getElementById('resultado').innerHTML = parseFloat(temp.toFixed(13))
 }
 //função para adicionar parenteses
 function parentheses(){
@@ -47,23 +47,20 @@ function parentheses(){
         temp += '('
         quant_paren_open += 1
     }
-    console.log(temp)
 }
 //quando clicar no botao igual ele vai verificar a primeira ocorrencia de ( e vai pegar o valor a partir dai ate o primeiro ) para fazer a soma e no final vai apagar esses parenteses
 
 function calc_parentheses(){
     let paren_open_index = temp.lastIndexOf('(', temp.length) + 1
+    console.log(paren_open_index)
     let paren_closed_idex = temp.indexOf(')', paren_open_index)
+    console.log(paren_closed_idex)
     let paren_value = temp.substring(paren_open_index, paren_closed_idex)
-    if(paren_value.indexOf('^')){
-        elevate()
-    }
-    if(paren_value.indexOf('%')){
-        percentage()
-    }
-    let paren_calc_final = eval(paren_value)
+    console.log(paren_value)
+    let paren_calc_final = eval(paren_value).toFixed(13)
     console.log(paren_calc_final)
     temp = temp.replace('('+paren_value+')', paren_calc_final)
+    console.log(temp)
 
 }
 
@@ -78,36 +75,40 @@ function percentage() {
 
     let betw_perc               = temp.substring(prox_space_index + 1, per_first_space_index ) // pega o sinal entre os numeros da porcentagem
     let per_result              = ''
-
+    console.log(per_value)
+    console.log(prox_value)
+    console.log(betw_perc)
     if (betw_perc != ''){
         per_result = (per_value * (prox_value / 100))
         let result_prox_value_with_perc = eval(prox_value+betw_perc+per_result)
-        temp = temp.replace(temp.substring(prox_space_value_index+1, per_index_final)+'%', result_prox_value_with_perc.toFixed(14))
+        temp = temp.replace(temp.substring(prox_space_value_index+1, per_index_final)+'%', result_prox_value_with_perc.toFixed(13))
     }else{
         per_result = (per_value / 100)
-        temp = temp.replace((betw_perc + ' ' + (temp.substring(per_first_space_index + 1, per_index_final)+'%')).toString(), per_result.toFixed(14))
+        temp = temp.replace((temp.substring(per_first_space_index + 1, per_index_final)+'%').toString(), per_result.toFixed(13))
     }
+
 }
 
 function elevate(){
-    let value = temp.substring(temp.lastIndexOf(' ' , temp.indexOf('^')), temp.indexOf('^'))
+    let value = temp.substring(temp.lastIndexOf(' ' , temp.indexOf('^')) + 1, temp.indexOf('^'))
     if (value.indexOf('(') != -1){
-        value = value.substring(1, value.length)
+        value = value.substring(value.lastIndexOf('(') + 1, value.length)
     }
-    console.log(value)
+
+    if(value.indexOf('%') != -1){
+        value = value / 100
+    }
     if ( temp.indexOf(' ', temp.indexOf('^')) != -1) {
         expo_value = temp.substring(temp.indexOf('^') + 1, temp.indexOf(' ', temp.indexOf('^')))
     }else{
         expo_value = temp.substring(temp.indexOf('^') + 1, temp.length)
     }
-    console.log(expo_value)
     if (expo_value.indexOf(')') != -1){
-        expo_value = expo_value.substring(0, expo_value.length - 1)
+        expo_value = expo_value.substring(0,expo_value.indexOf(')'))
     }
-    console.log(expo_value)
-    console.log(value)
+
     const elevate_result = Math.pow(parseFloat(value), parseFloat(expo_value))
-    temp = temp.replace(value.toString() + '^' + expo_value, elevate_result.toString())
+    temp = temp.replace(value.toString() + '^' + expo_value, ' ' + elevate_result.toString())
 }
 
 function cinstyle() {
