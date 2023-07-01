@@ -9,7 +9,7 @@ let expo_value = ''
 let quant_paren_open = 0
 let quant_paren_closed = 0
 function insert( valor ) {
-    if (valor == '+' || valor == '-' || valor == '÷' || valor == '*'){
+    if (valor == '+' || valor == '-' || valor == '÷' || valor == 'x'){
         temp += ' ' + valor + ' '
 
     }else if(valor == '()'){
@@ -18,9 +18,7 @@ function insert( valor ) {
         temp += valor
     }
     temp_no_space = temp.replace(/\s/g, '')//regex
-    if (temp_no_space.indexOf('*') != -1){
-        temp_no_space = temp_no_space.replaceAll('*','x')
-    }
+
     result.innerHTML = temp_no_space
 }
 
@@ -28,6 +26,9 @@ function insert( valor ) {
 function igual() {
     if (temp.indexOf('÷') != -1){
         temp= temp.replaceAll('÷', '/')
+    }
+    if (temp.indexOf('x') != -1){
+        temp = temp.replaceAll('x','*')
     }
     if (temp.indexOf('^') != -1){
         elevate()
