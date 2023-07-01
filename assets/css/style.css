@@ -16,6 +16,18 @@
     --text-color: white;
     --text-key-color: white;
 }
+.mudar-tema{
+    --body-background-color: linear-gradient(black, crimson);
+    --calc-background-color: transparent;
+    --keys-background-color: transparent;
+    --hover-keys-color: rgba(0,0,0,0.1);
+    --ac-key-color: transparent;
+    --ac-hover-key: rgba(0,0,0,0.1);
+    --special-keys-backgroun-color:transparent;
+    --special-keys-hover: rgba(0,0,0,0.1);
+    --text-color: black;
+    --text-key-color: black;
+}
 
 body {
     display: flex;
@@ -27,12 +39,99 @@ body {
     height: 100vh;
     overflow: hidden;
 }
+/* INTERFACE */
+
+.interface {
+    position: absolute;
+    width: 95vw;
+    height: 30vh;
+    top: 20px;
+    left: 20px;
+    z-index: 300;
+}
+.btn-menu, .bubbles-btn, .theme_btn{
+    width: 60px;
+    height: 30px;
+    background-color: rgba(255,255,255,0.1);
+    border: none;
+    border-radius: 5px;
+    transition: 1s;
+    color: var(--text-color);
+}
+
+.bubbles-btn:hover, .btn_theme:hover, .btn-menu:hover{
+    background-color: rgba(255, 255, 255, 0.8);
+
+}
+
+.interface-one{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: start;
+    gap: 10px;
+    top: 40px;
+    position: absolute;
+    transition: 1s;
+    opacity: 0;
+}
+.interface-one-open{
+    transform: translate(20px, 10px);
+    opacity: 1;
+
+}
+
+.interface-one .theme-btn{
+    position: relative;
+    height: 20px;
+    width: 20px;
+    border: none;
+    background-color: rgba(255,255,255,.8);
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+}
+
+.interface-one .theme-btn::before{
+    content: ' ';
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    background-color: rgba(255,255,255,.8);
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    transform: translate(10px, -10px);
+}
+.interface-one .theme-btn .fa-sun{
+    position: absolute;
+    color: white;
+    transform: translate(-7px,-6.5px);
+}
+.interface-one .theme-btn .fa-moon{
+    position: absolute;
+    display: none;
+    color: white;
+    transform: translate(15px,-6.5px);
+}
+.interface-one .theme-btn span{
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    background-color: black;
+    border-radius: 50%;
+    transform: translate(-10px,-10px);
+    transition: 1s;
+}
+
+
+
+/* CALCULATOR */
+
 main {
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100vh;
+    z-index: 100;
 }
 
 .cal-simple {
@@ -49,6 +148,7 @@ main {
     border-left: 1px solid rgba(255,255,255,0.5);
     border-top: 1px solid rgba(255,255,255,0.5);
     border-top: 1px solid rgba(255,255,255,0.5);
+    z-index: 10000;
 }
 
 .cont-cal-simple {

@@ -9,8 +9,23 @@
     <title>Calculadora</title>
     <link rel="stylesheet" href="./assets/css/bubble.css">
     <link rel="stylesheet" href="./assets/css/style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+    <div class="interface">
+        <button class="menu-interface btn-menu" onclick="menu_interface_open()">Menu</button>
+        <div class="interface-one">
+            <button class="bubbles-btn" onclick="off_bubbles()">Bubbles</button>
+            <button class="theme-btn" onclick="dark_menu()">
+                <span id="ball-theme"></span>
+                <i class="fa-regular fa-sun"></i>
+                <i class="fa-solid fa-moon"></i>
+            </button>
+        </div>
+        
+    </div>
     <div class="bubbles">
         <span class="bubble-1"></span>
         <span class="bubble-2"></span>
@@ -19,6 +34,8 @@
         <span class="bubble-5"></span>
         <span class="bubble-6"></span>
         <span class="bubble-7"></span>
+        <span class="bubble-8"></span>
+        <span class="bubble-9"></span>
     </div>
     <main class="main">
         <div class="cal-simple">

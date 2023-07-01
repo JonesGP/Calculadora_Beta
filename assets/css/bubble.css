@@ -2,6 +2,7 @@
 .bubbles{
     position: absolute;
     bottom: -100px;
+    left: -300px;
     display: flex;
     justify-content: space-around;
     width: 100%;
@@ -15,12 +16,13 @@
     box-shadow: 0 20px 50px rgba(0,0,0,0.15);
     backdrop-filter: blur(5px);
     animation: move 10s linear infinite;
-    position: relative;
+    border-radius: 50%;
     overflow: hidden;
+    position: relative;
 }
 @keyframes move{
     100%{
-        transform: translateY(-90vh);
+        transform: translate(90vw, -120vh);
         
     }
 }
@@ -52,6 +54,15 @@
     animation-delay: 3s;
     transform: scale(1.5);
 }
+.bubbles span.bubble-8{
+    animation-delay: 2s;
+    transform: scale(1);
+}
+.bubbles span.bubble-9{
+    animation-delay: 7s;
+    transform: scale(2);
+}
+
 
 .bubbles span::before{
     content: '';
@@ -63,6 +74,7 @@
     transform: skew(45deg) translateX(150px);
     background: rgba(255,255,255,0.15);
     animation: mirror 2s linear infinite;
+    z-index: -1000;
 }
 
 @keyframes mirror{
@@ -89,4 +101,10 @@
 }
 .bubbles span.bubble-7:before{
     animation-delay: 6s;
+}
+.bubble span.bubble-8:before{
+    animation-delay: 8s;
+}
+.bubble span.bubble-9:before{
+    animation-delay: 7.5s;
 }

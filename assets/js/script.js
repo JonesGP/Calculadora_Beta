@@ -193,3 +193,59 @@ function del(){
     }
     
 }
+
+
+// Interface
+
+let bubbles_btn = document.querySelector('.bubbles-btn')
+let btn_invert = true
+let btn_interface_mopen = true
+let btn_interface_menu = document.querySelector('.interface-one')
+
+function off_bubbles(){
+    let bubbles = document.querySelector('.bubbles')
+    if (btn_invert == true) {
+        bubbles.style.display = "none";
+        btn_invert = !btn_invert
+        console.log(btn_invert)
+    }
+    else{
+        btn_invert = true
+        bubbles.style.display = "flex"
+    }
+}
+
+function menu_interface_open(){
+    if(btn_interface_mopen == true){
+        btn_interface_menu.style.opacity = "1"
+        btn_interface_menu.classList.add("interface-one-open")
+        btn_interface_mopen = !btn_interface_mopen
+    }
+    else{
+        btn_interface_mopen = true
+        btn_interface_menu.style.opacity = "0"
+        btn_interface_menu.classList.remove("interface-one-open")
+    }
+}
+
+let ball_theme = document.querySelector("#ball-theme")
+let body = document.querySelector("body")
+let moon = document.querySelector(".fa-moon")
+let sun = document.querySelector(".fa-sun")
+let ball_position = true
+function dark_menu(){
+    if (ball_position == true){
+        ball_theme.style.transform = "translate(10px,-10px)"
+        sun.style.display = "none"
+        moon.style.display = "inline-block"
+        body.classList.add("mudar-tema")
+        ball_position = false
+    }
+    else{
+        ball_position = true
+        sun.style.display = "inline-block"
+        moon.style.display = "none"
+        ball_theme.style.transform = "translate(-10px,-10px)"
+        body.classList.remove("mudar-tema")
+    }
+}
