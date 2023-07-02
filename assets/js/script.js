@@ -14,34 +14,44 @@ function insert( valor ) {
 
     }else if(valor == '()'){
         parentheses()
+    }else if(valor == '√'){
+        temp += valor
     }else{
         temp += valor
     }
     temp_no_space = temp.replace(/\s/g, '')//regex
-
     result.innerHTML = temp_no_space
 }
 
 
 function igual() {
+    console.log(temp)
     if (temp.indexOf('÷') != -1){
-        temp= temp.replaceAll('÷', '/')
+        temp = temp.replaceAll('÷', '/')
     }
+    console.log(temp)
     if (temp.indexOf('x') != -1){
         temp = temp.replaceAll('x','*')
     }
+    console.log(temp)
     if (temp.indexOf('^') != -1){
         elevate()
     }
+    console.log(temp)
     while(temp.indexOf('%') != -1){
         percentage()
-        console.log('percentage')
     }
-    console.log(temp.indexOf('%'))
+    console.log(temp)
+    while(temp.indexOf("√") != -1){
+        square_root()
+    }
+    console.log(temp)
     if ((temp.indexOf('(') != -1) || temp.indexOf(')') != -1){
         calc_parentheses()
     }
+    console.log(temp)
     temp = eval(temp)
+    console.log(temp)
     document.getElementById('resultado').innerHTML = parseFloat(temp.toFixed(6))
 }
 //função para adicionar parenteses
@@ -59,48 +69,45 @@ function parentheses(){
 //quando clicar no botao igual ele vai verificar a primeira ocorrencia de ( e vai pegar o valor a partir dai ate o primeiro ) para fazer a soma e no final vai apagar esses parenteses
 
 function calc_parentheses(){
-    console.log(temp)
     let paren_open_index = temp.lastIndexOf('(', temp.length) + 1
-    console.log(paren_open_index)
     let paren_closed_idex = temp.indexOf(')', paren_open_index)
-    console.log(paren_closed_idex)
     let paren_value = temp.substring(paren_open_index, paren_closed_idex)
-    console.log(paren_value)
     let paren_calc_final = eval(paren_value).toFixed(6)
-    console.log(paren_calc_final)
-    console.log(temp)
     temp = temp.replace('('+paren_value+')', paren_calc_final)
-    console.log(temp)
-
 }
 
-
-
-
-
-
-
+function square_root(){
+    let square_sin_index = temp.indexOf('√') + 1
+    let square_value = temp.substring(square_sin_index, temp.indexOf(' ', square_sin_index))
+    if (temp.indexOf(' ', square_sin_index) == -1){
+        square_value = temp.substring(square_sin_index, temp.length)
+        temp = temp.replace(temp.substring(square_sin_index-1, temp.length), Math.sqrt(square_value))
+        return
+    }
+    temp = temp.replace(temp.substring(square_sin_index-1, temp.indexOf(' ', square_sin_index)), Math.sqrt(square_value))
+}
 
 
 function percentage() {
     let per_index_final         = temp.indexOf('%'),
         per_first_space_index   = temp.lastIndexOf(' ' , per_index_final),
         per_value_string        = temp.substring(per_index_final, per_first_space_index +1) //valor da porcentagem
-        let per_value               = parseInt(per_value_string)
-        let prox_space_index        = temp.lastIndexOf(' ', per_index_final - (per_value.toString().length + 2)),
+    if (per_value_string.indexOf('√') != -1){
+        per_value_string = per_value_string.substring(1, per_value_string.length)
+    }
+    let per_value               = parseInt(per_value_string),
+        prox_space_index        = temp.lastIndexOf(' ', per_index_final - (per_value.toString().length + 2)),
         prox_space_value_index  = temp.lastIndexOf(' ', prox_space_index -1),
         prox_value              = temp.substring(prox_space_value_index + 1, prox_space_index), //valor a frente da porcentagem
         betw_perc               = temp.substring(prox_space_index + 1, per_first_space_index ), // pega o sinal entre os numeros da porcentagem
         per_result              = ''
-        
+
     if (per_value_string.indexOf('(') != -1){
         prox_space_value_index = prox_space_value_index + 1
-        console.log('corrou1')
     }
     per_value_string = remove_first_paren(per_value_string)
     if (prox_value.indexOf('(') != -1){
         prox_space_value_index = prox_space_value_index + 1
-        console.log('corrou2')
         prox_value = remove_first_paren(prox_value)
     }
     if (prox_value.length == 0 & temp.substring(per_index_final, per_first_space_index +1) != ''){
@@ -117,27 +124,22 @@ function percentage() {
 
 }
 
-
-
-
-
-
-
 function elevate(){
     let value = temp.substring(temp.lastIndexOf(' ' , temp.indexOf('^')) + 1, temp.indexOf('^'))
-    console.log(temp)
     if (value.indexOf('(') != -1){
         value = value.substring(value.lastIndexOf('(') + 1, value.length)
     }
-    console.log(temp)
+
     if(value.indexOf('%') != -1){
         value = value / 100
     }
+
     if ( temp.indexOf(' ', temp.indexOf('^')) != -1) {
         expo_value = temp.substring(temp.indexOf('^') + 1, temp.indexOf(' ', temp.indexOf('^')))
     }else{
         expo_value = temp.substring(temp.indexOf('^') + 1, temp.length)
     }
+
     if (expo_value.indexOf(')') != -1){
         expo_value = expo_value.substring(0,expo_value.indexOf(')'))
     }
@@ -147,11 +149,9 @@ function elevate(){
 }
 
 function remove_first_paren(value){
-    console.log(value)
     if (value.indexOf('(') != -1){
         value = value.substring(value.lastIndexOf('(') + 1, value.length)
     }
-    console.log(value)
     return value
 }
 function cinstyle() {
@@ -181,7 +181,6 @@ function clean() {
 }
 
 function del(){
-    console.log('temp')
     if(temp.length <= 0){
         return
     }
