@@ -25,33 +25,25 @@ function insert( valor ) {
 
 
 function igual() {
-    console.log(temp)
     if (temp.indexOf('÷') != -1){
         temp = temp.replaceAll('÷', '/')
     }
-    console.log(temp)
     if (temp.indexOf('x') != -1){
         temp = temp.replaceAll('x','*')
     }
-    console.log(temp)
     if (temp.indexOf('^') != -1){
         elevate()
     }
-    console.log(temp)
     while(temp.indexOf('%') != -1){
         percentage()
     }
-    console.log(temp)
     while(temp.indexOf("√") != -1){
         square_root()
     }
-    console.log(temp)
     if ((temp.indexOf('(') != -1) || temp.indexOf(')') != -1){
         calc_parentheses()
     }
-    console.log(temp)
     temp = eval(temp)
-    console.log(temp)
     document.getElementById('resultado').innerHTML = parseFloat(temp.toFixed(6))
 }
 //função para adicionar parenteses
@@ -220,6 +212,7 @@ function off_bubbles(){
     }
 }
 
+// função para abrir a interface
 function menu_interface_open(){
     if(btn_interface_mopen == true){
         btn_interface_menu.style.opacity = "1"
@@ -233,24 +226,73 @@ function menu_interface_open(){
     }
 }
 
+// função para ligar o modo escuro
+let theme_btn = document.querySelector(".theme-btn")
 let ball_theme = document.querySelector("#ball-theme")
-let body = document.querySelector("body")
+let html = document.querySelector("html")
 let moon = document.querySelector(".fa-moon")
 let sun = document.querySelector(".fa-sun")
 let ball_position = true
 function dark_menu(){
+    console.log(ball_position)
     if (ball_position == true){
         ball_theme.style.transform = "translate(10px,-10px)"
         sun.style.display = "none"
         moon.style.display = "inline-block"
-        body.classList.add("mudar-tema")
+        html.classList.add("dark-mode")
         ball_position = false
+        localStorage.setItem("dark-mode", "dark-mode-on")
     }
     else{
         ball_position = true
         sun.style.display = "inline-block"
         moon.style.display = "none"
         ball_theme.style.transform = "translate(-10px,-10px)"
-        body.classList.remove("mudar-tema")
+        html.classList.remove("dark-mode")
+        localStorage.removeItem("dark-mode")
     }
 }
+
+// função para mudar o tema
+let all_themes = document.querySelector('#temas')
+function change_theme(){
+
+    let option_value = all_themes.options[all_themes.selectedIndex].value // seleciona o valor do item que esta selecionado
+    console.log(all_themes.options)
+    if (option_value == 'black-theme'){
+        html.classList.add("black-theme")
+        theme_btn.classList.add("not-click")
+        dark_menu(ball_position = false)
+        
+        localStorage.setItem("current_theme", "black-theme") // salva o valor
+    }
+    if (option_value == 'red-blue-grass'){
+        html.classList.remove('black-theme')
+        theme_btn.classList.remove("not-click")
+
+        localStorage.setItem("current_theme", "red-blue-grass")
+    }
+}
+
+// salvar no local storage os resultados e temas
+
+let current_theme = localStorage.getItem("current_theme")
+let dark_mode_load = localStorage.getItem('dark-mode')
+let option_theme = null
+function load_save_theme(){
+    if (current_theme == "black-theme"){
+        option_theme = all_themes.options[all_themes.selectedIndex]
+        html.classList.add('black-theme')
+        theme_btn.classList.add("not-click")
+        all_themes.selectedIndex = 1
+    }
+    if(current_theme == "red-blue-grass"){
+        option_theme = all_themes.options[all_themes.selectedIndex]
+        if (dark_mode_load == "dark-mode-on"){
+            dark_menu(ball_position = true)
+            console.log("entrou")
+        }
+    }
+}
+load_save_theme()
+

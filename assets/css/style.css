@@ -15,18 +15,59 @@
     --special-keys-hover: rgba(255,255,255,0.1);
     --text-color: white;
     --text-key-color: white;
+
+    /* tema e estilo */
+    --calc-display: flex;
+    --calc-background-color: var(--calc-background-color);
+    --calc-border-radius: 10px;
+    --calc-height: 450px;
+    --calc-width: 300px;
+    --calc-align-items: center;
+    --calc-transition: 0.1s;
+    --calc-box-shadow: 0 20px 50px rgba(0,0,0,.15);
+    --calc-backdrop-filter: blur(5px);
+    --calc-border-top: 1px solid rgba(255,255,255,0.5);
+    --calc-border-left: 1px solid rgba(255,255,255,0.5);
+    --calc-border-top: 1px solid rgba(255,255,255,0.5);
+    --calc-border-top: 1px solid rgba(255,255,255,0.5);
+    --calc-z-index: 10000;
 }
-.mudar-tema{
+.dark-mode:root{
     --body-background-color: linear-gradient(black, crimson);
     --calc-background-color: transparent;
     --keys-background-color: transparent;
     --hover-keys-color: rgba(0,0,0,0.1);
-    --ac-key-color: transparent;
+    --ac-key-color: transparent;   
+    --calc-width: 300px;
     --ac-hover-key: rgba(0,0,0,0.1);
-    --special-keys-backgroun-color:transparent;
+    --special-keys-background-color:transparent;
     --special-keys-hover: rgba(0,0,0,0.1);
     --text-color: black;
     --text-key-color: black;
+}
+
+.black-theme:root{
+    --body-background-color: black;
+    --calc-display: flex;
+    --calc-background-color: var(--calc-background-color);
+    --calc-border-radius: 10px;
+    --calc-height: 450px;
+    --calc-width: 300px;
+    --calc-align-items: center;
+    --calc-transition: 0.1s;
+    --calc-box-shadow: 0 20px 50px rgba(0,0,0,.15);
+    --calc-backdrop-filter: blur(5px);
+    --calc-border-top: 1px solid rgba(255,255,255,0.5);
+    --calc-border-left: 1px solid rgba(255,255,255,0.5);
+    --calc-border-top: 1px solid rgba(255,255,255,0.5);
+    --calc-border-top: 1px solid rgba(255,255,255,0.5);
+    --calc-z-index: 10000;
+}
+
+.not-click{
+    opacity: 0;
+    user-select: none;
+    pointer-events: none;
 }
 
 body {
@@ -69,7 +110,7 @@ body {
     align-items: center;
     width: 100%;
     justify-content: start;
-    gap: 10px;
+    gap: 20px;
     top: 40px;
     position: absolute;
     transition: 1s;
@@ -85,6 +126,7 @@ body {
     position: relative;
     height: 20px;
     width: 20px;
+    left: -10px;
     border: none;
     background-color: rgba(255,255,255,.8);
     border-top-left-radius: 50%;
@@ -116,13 +158,19 @@ body {
     position: absolute;
     height: 20px;
     width: 20px;
-    background-color: black;
+    background-color: rgba(0,0,0,0.8);
     border-radius: 50%;
     transform: translate(-10px,-10px);
     transition: 1s;
 }
 
-
+#temas{
+    background-color: rgba(0,0,0,0.1);
+    color: white;
+    font-size: 15px;
+    border: none;
+    border-radius: 3px;
+}
 
 /* CALCULATOR */
 
@@ -134,21 +182,22 @@ main {
     z-index: 100;
 }
 
+
 .cal-simple {
-    display: flex;
+    display: var(--calc-display);
     background-color: var(--calc-background-color);
-    border-radius: 10px;
-    height: 450px;
-    width: 300px;
-    align-items: center;
-    transition: 0.1s;
-    box-shadow: 0 20px 50px rgba(0,0,0,.15);
-    backdrop-filter: blur(5px);
-    border-top: 1px solid rgba(255,255,255,0.5);
-    border-left: 1px solid rgba(255,255,255,0.5);
-    border-top: 1px solid rgba(255,255,255,0.5);
-    border-top: 1px solid rgba(255,255,255,0.5);
-    z-index: 10000;
+    border-radius: var(--calc-border-radius);
+    height: var(--calc-height);
+    width: var(--calc-width);
+    align-items: var(--calc-align-items);
+    transition: var(--calc-transition);
+    box-shadow: var(--calc-box-shadow);
+    backdrop-filter: var(--calc-backdrop-filter);
+    border-top: var(--calc-border-top);
+    border-left: var(--calc-border-left);
+    border-top: var(--calc-border-top);
+    border-top: var(--calc-border-top);
+    z-index: var(--calc-z-index);
 }
 
 .cont-cal-simple {
@@ -216,7 +265,7 @@ main {
     background-color: var(--ac-hover-key);
 }
 .bt-cal-simp-special {
-    background-color: var(--special-keys-backgroun-color);
+    background-color: var(--special-keys-background-color);
 }
 .bt-cal-simp-special:hover {
     background-color: var(--special-keys-hover);
@@ -231,6 +280,10 @@ tr td:last-child{
     display: table-cell;
 }
 .cin-btn{
-    background-color: var(--special-keys-backgroun-color);
+    background-color: var(--special-keys-background-color);
+}
+
+.not-click{
+    opacity: 0;
 }
 

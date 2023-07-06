@@ -16,13 +16,17 @@
 <body>
     <div class="interface">
         <button class="menu-interface btn-menu" onclick="menu_interface_open()">Menu</button>
-        <div class="interface-one">
+        <div class="interface-one interface-one-open">
             <button class="bubbles-btn" onclick="off_bubbles()">Bubbles</button>
             <button class="theme-btn" onclick="dark_menu()">
                 <span id="ball-theme"></span>
                 <i class="fa-regular fa-sun"></i>
                 <i class="fa-solid fa-moon"></i>
             </button>
+            <select name="temas" onchange="change_theme()" id="temas">
+                <option selected value="red-blue-grass">Vermelho azul vidro</option>
+                <option value="black-theme">Preto negrito</option>
+            </select>
         </div>
         
     </div>
@@ -86,6 +90,6 @@
             </div>
         </div>
     </main>
-    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/script.js" defer></script> <!-- esse defer na frente significa que o javascript vai ser baixado junto com a pagina porem só será executado no final dela-->
 </body>
 </html>
