@@ -201,14 +201,18 @@ let btn_interface_menu = document.querySelector('.interface-one')
 
 function off_bubbles(){
     let bubbles = document.querySelector('.bubbles')
-    if (btn_invert == true) {
+    if (btn_invert == false) {
         bubbles.style.display = "none";
         btn_invert = !btn_invert
         console.log(btn_invert)
+
+        localStorage.removeItem("bubbles")
     }
     else{
-        btn_invert = true
+        btn_invert = false
         bubbles.style.display = "flex"
+        localStorage.setItem("bubbles", "on")
+        
     }
 }
 
@@ -278,20 +282,26 @@ function change_theme(){
 
 let current_theme = localStorage.getItem("current_theme")
 let dark_mode_load = localStorage.getItem('dark-mode')
+let bubbles_onoff = localStorage.getItem("bubbles")
 let option_theme = null
 function load_save_theme(){
     if (current_theme == "black-theme"){
         option_theme = all_themes.options[all_themes.selectedIndex]
         html.classList.add('black-theme')
         theme_btn.classList.add("not-click")
-        all_themes.selectedIndex = 1
+        all_themes.selectedIndex = 1 //muda o selected das options do select
     }
     if(current_theme == "red-blue-grass"){
         option_theme = all_themes.options[all_themes.selectedIndex]
         if (dark_mode_load == "dark-mode-on"){
             dark_menu(ball_position = true)
-            console.log("entrou")
+            console.log(bubbles_onoff)
         }
+    }
+
+    if(bubbles_onoff == "on"){
+        console.log("teste")
+        off_bubbles(btn_invert = true)
     }
 }
 load_save_theme()
