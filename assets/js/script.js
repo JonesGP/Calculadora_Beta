@@ -258,22 +258,22 @@ function del(){
 // Interface
 
 let bubbles_btn = document.querySelector('.bubbles-btn')
-let btn_invert = true
+let btn_invert = false
 let btn_interface_mopen = true
 let btn_interface_menu = document.querySelector('.interface-one')
 
 function off_bubbles(){
     let bubbles = document.querySelector('.bubbles')
-    if (btn_invert == false) {
-        bubbles.style.display = "none";
+    if (btn_invert == true) {
+        bubbles.style.display = "flex";
         btn_invert = !btn_invert
 
-        localStorage.removeItem("bubbles")
+        localStorage.setItem("bubbles", "on")
     }
     else{
-        btn_invert = false
-        bubbles.style.display = "flex"
-        localStorage.setItem("bubbles", "on")
+        btn_invert = true
+        bubbles.style.display = "none"
+        localStorage.setItem("bubbles", "off")
         
     }
 }
@@ -362,6 +362,9 @@ function load_save_theme(){
 
     if(bubbles_onoff == "on"){
         off_bubbles(btn_invert = true)
+    }
+    else if(bubbles_onoff == "off"){
+        off_bubbles(btn_invert = false)
     }
 }
 load_save_theme()
