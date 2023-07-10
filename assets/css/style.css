@@ -90,7 +90,7 @@ body {
     left: 20px;
     z-index: 300;
 }
-.btn-menu, .bubbles-btn, .theme_btn{
+.btn-menu, .bubbles-btn, .theme_btn, .clear-btn{
     width: 60px;
     height: 30px;
     background-color: rgba(255,255,255,0.1);
@@ -287,3 +287,29 @@ tr td:last-child{
     opacity: 0;
 }
 
+/* resultados */
+.results-container{
+    position: absolute;
+    top: 460px;
+    background-color: var(--calc-background-color);
+    border-radius: var(--calc-border-radius);
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+    border-top: var(--calc-border-top);
+    border-left: var(--calc-border-left);
+    backdrop-filter: var(--calc-backdrop-filter);
+    box-shadow: var(--calc-box-shadow);
+    color: var(--text-color);
+}
+.btn-results{
+    position: absolute;
+    right: 20px;
+    border: none;
+    background-color: var(--calc-background-color);
+    border-top: var(--calc-border-top);
+    border-left: var(--calc-border-left);
+    width: 14px;
+    border-radius: 2px;
+    color: var(--text-color);
+}

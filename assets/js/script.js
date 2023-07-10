@@ -5,6 +5,7 @@ let temp = []
 let temp_no_space = []
 let perc = '%'
 let expo_value = ''
+let results_val = []
 
 let quant_paren_open = 0
 let quant_paren_closed = 0
@@ -25,6 +26,7 @@ function insert( valor ) {
 
 
 function igual() {
+    result_no_result = temp
     if (temp.indexOf('÷') != -1){
         temp = temp.replaceAll('÷', '/')
     }
@@ -34,27 +36,48 @@ function igual() {
     if (temp.indexOf('^') != -1){
         elevate()
     }
-    while(temp.indexOf('%') != -1){
-        percentage()
-    }
     while(temp.indexOf("√") != -1){
         square_root()
+    }
+    if(temp.indexOf('%') != -1){
+        percentage()
     }
     if ((temp.indexOf('(') != -1) || temp.indexOf(')') != -1){
         calc_parentheses()
     }
     temp = eval(temp)
+    save_results()
     document.getElementById('resultado').innerHTML = parseFloat(temp.toFixed(6))
 }
+
+// manipulação dos resultados seja salvar como recarregar
+let val_results_html = document.querySelector('.val-results')
+function save_results() {
+    results_val.unshift(result_no_result + ' = ' + temp) // unshift adiciona no inicio de uma array
+    val_results_html.insertAdjacentHTML('afterbegin', results_val[0] + '<button class="btn-results">+</button>'+ '<br>') // insertAdjacentHTML adiciona um elemento com base no primeiro argumento
+    localStorage.setItem('resultados-calc', JSON.stringify(results_val))
+}
+function clear_results_list(){
+    results_val = []
+    val_results_html.innerHTML = ""
+    localStorage.removeItem("resultados-calc")
+}
+if(localStorage.hasOwnProperty("resultados-calc")){
+    results_val = JSON.parse(localStorage.getItem("resultados-calc"))
+    for(var i = results_val.length -1; i > -1; i--){
+        val_results_html.insertAdjacentHTML('afterbegin', results_val[i] + '<button class="btn-results">+</button>'+ '<br>')
+    }
+}
+
 //função para adicionar parenteses
 function parentheses(){
     let space_paren_true = temp.lastIndexOf('(', temp.length)
     if (temp.indexOf('(') > -1 && (space_paren_true - temp.length) < -1 && quant_paren_open > quant_paren_closed && !(temp.substring(temp.length -1) == ' ')){
-        temp += ')'
+        temp += ' )'
         quant_paren_closed += 1
 
     }else{
-        temp += '('
+        temp += '( '
         quant_paren_open += 1
     }
 }
@@ -80,40 +103,85 @@ function square_root(){
 }
 
 
-function percentage() {
-    let per_index_final         = temp.indexOf('%'),
-        per_first_space_index   = temp.lastIndexOf(' ' , per_index_final),
-        per_value_string        = temp.substring(per_index_final, per_first_space_index +1) //valor da porcentagem
-    if (per_value_string.indexOf('√') != -1){
-        per_value_string = per_value_string.substring(1, per_value_string.length)
-    }
-    let per_value               = parseInt(per_value_string),
-        prox_space_index        = temp.lastIndexOf(' ', per_index_final - (per_value.toString().length + 2)),
-        prox_space_value_index  = temp.lastIndexOf(' ', prox_space_index -1),
-        prox_value              = temp.substring(prox_space_value_index + 1, prox_space_index), //valor a frente da porcentagem
-        betw_perc               = temp.substring(prox_space_index + 1, per_first_space_index ), // pega o sinal entre os numeros da porcentagem
-        per_result              = ''
+// function percentage() {
+//     console.log(temp)
+//     let per_index_final         = temp.indexOf('%'),
+//         per_first_space_index   = temp.lastIndexOf(' ' , per_index_final),
+//         per_value_string        = temp.substring(per_index_final, per_first_space_index +1) //valor da porcentagem
+//     if (per_value_string.indexOf('√') != -1){
+//         per_value_string = per_value_string.substring(1, per_value_string.length)
+//     }
+//     if (per_value_string.indexOf('(') != -1){
+//         per_value_string = per_value_string.substring(1, per_value_string.length)
+//     }
+//     console.log(per_value_string)
+//     let per_value               = parseInt(per_value_string), // converte o valor da porcentagem de string para inteiro
+//         prox_space_index        = temp.lastIndexOf(' ', per_index_final - (per_value.toString().length + 2)),
+//         prox_space_value_index  = temp.lastIndexOf(' ', prox_space_index -1),
+//         prox_value              = temp.substring(prox_space_value_index + 1, prox_space_index), //valor a frente da porcentagem
+//         betw_perc               = temp.substring(prox_space_index + 1, per_first_space_index ), // pega o sinal entre os numeros da porcentagem
+//         per_result              = ''
 
-    if (per_value_string.indexOf('(') != -1){
-        prox_space_value_index = prox_space_value_index + 1
+//     if (per_value_string.indexOf('(') != -1){
+//         prox_space_value_index = prox_space_value_index + 1
+//     }
+//     per_value_string = remove_first_paren(per_value_string)
+
+
+//     if (prox_value.indexOf('(') != -1){
+//         prox_space_value_index = prox_space_value_index + 1
+//         prox_value = remove_first_paren(prox_value)
+//     }
+
+
+//     if (prox_value.length == 0 & temp.substring(per_index_final, per_first_space_index +1) != ''){
+//         console.log(per_value)
+//         per_result = (per_value / 100)
+//         console.log(temp)
+//         temp = temp.replace((temp.substring(prox_space_value_index + 1, per_index_final)+'%').toString(), per_result.toFixed(6))
+//         console.log(temp)
+
+//     }else if (betw_perc != '' & betw_perc != ' '){
+//         per_result = (per_value * (prox_value / 100))
+//         let result_prox_value_with_perc = eval(prox_value+betw_perc+per_result)
+//         temp = temp.replace(temp.substring(prox_space_value_index+1, per_index_final)+'%', result_prox_value_with_perc.toFixed(6))
+
+//     }else{
+//         per_result = (per_value / 100)
+//         temp = temp.replace((temp.substring(per_first_space_index + 1, per_index_final)+'%').toString(), per_result.toFixed(6))
+//     }
+// }
+
+function percentage(){
+    let per_index = temp.indexOf("%")
+    let per_first_space_index = temp.lastIndexOf(' ', (temp.lastIndexOf(' ', per_index) - 3))
+    console.log(temp.lastIndexOf(' ', per_index))
+    let per_full_vals = temp.substring(per_first_space_index + 1, per_index) //valor de todos o conjunto da porcentagem
+    if (per_full_vals.indexOf('√') != -1){
+        per_full_vals = per_full_vals.substring(1, per_full_vals.length)
     }
-    per_value_string = remove_first_paren(per_value_string)
-    if (prox_value.indexOf('(') != -1){
-        prox_space_value_index = prox_space_value_index + 1
-        prox_value = remove_first_paren(prox_value)
+    if (per_full_vals.indexOf('(') != -1){
+        per_full_vals = per_full_vals.substring(1, per_full_vals.length)
     }
-    if (prox_value.length == 0 & temp.substring(per_index_final, per_first_space_index +1) != ''){
-        per_result = (per_value / 100)
-        temp = temp.replace((temp.substring(prox_space_value_index + 1, per_index_final)+'%').toString(), per_result.toFixed(6))
-    }else if (betw_perc != '' & betw_perc != ' '){
-        per_result = (per_value * (prox_value / 100))
-        let result_prox_value_with_perc = eval(prox_value+betw_perc+per_result)
-        temp = temp.replace(temp.substring(prox_space_value_index+1, per_index_final)+'%', result_prox_value_with_perc.toFixed(6))
+    let per_val = per_full_vals.substring(per_full_vals.length, per_full_vals.lastIndexOf(" ", per_full_vals) + 1) //valor da porcentagem
+    let per_prox_val = per_full_vals.substring(-1, per_full_vals.indexOf(' ')) //valor do numero proximo da porcentagem
+    let per_sinal = per_full_vals.substring(per_full_vals.indexOf(' '), per_full_vals.lastIndexOf(' ')) //valor do sinal
+    let per_result = ''
+
+    if (per_sinal != '' & per_sinal != ' '){
+        per_result = (per_val * (per_prox_val / 100))
+        let result_prox_value_with_perc = eval(per_prox_val + per_sinal + per_result)
+        temp = temp.replace(temp.substring(per_first_space_index, per_index)+'%', result_prox_value_with_perc.toFixed(6))
     }else{
-        per_result = (per_value / 100)
-        temp = temp.replace((temp.substring(per_first_space_index + 1, per_index_final)+'%').toString(), per_result.toFixed(6))
+        per_result = (per_val / 100)
+        temp = temp.replace((temp.substring(per_first_space_index + 1, per_index)+'%').toString(), per_result.toFixed(6))
+        console.log('quarta condição')
     }
+}
 
+function remove_first_paren(value){
+    value = value.substring(value.lastIndexOf('(') + 1, value.length)
+    return value
 }
 
 function elevate(){
@@ -140,12 +208,7 @@ function elevate(){
     temp = temp.replace(value.toString() + '^' + expo_value, ' ' + elevate_result.toString())
 }
 
-function remove_first_paren(value){
-    if (value.indexOf('(') != -1){
-        value = value.substring(value.lastIndexOf('(') + 1, value.length)
-    }
-    return value
-}
+
 function cinstyle() {
     let cal_simple      = document.querySelector('.cal-simple')
     let all_cin_buttons = document.querySelectorAll('[cin-calc]')
@@ -204,7 +267,6 @@ function off_bubbles(){
     if (btn_invert == false) {
         bubbles.style.display = "none";
         btn_invert = !btn_invert
-        console.log(btn_invert)
 
         localStorage.removeItem("bubbles")
     }
@@ -238,13 +300,13 @@ let moon = document.querySelector(".fa-moon")
 let sun = document.querySelector(".fa-sun")
 let ball_position = true
 function dark_menu(){
-    console.log(ball_position)
     if (ball_position == true){
         ball_theme.style.transform = "translate(10px,-10px)"
         sun.style.display = "none"
         moon.style.display = "inline-block"
         html.classList.add("dark-mode")
         ball_position = false
+
         localStorage.setItem("dark-mode", "dark-mode-on")
     }
     else{
@@ -253,6 +315,7 @@ function dark_menu(){
         moon.style.display = "none"
         ball_theme.style.transform = "translate(-10px,-10px)"
         html.classList.remove("dark-mode")
+
         localStorage.removeItem("dark-mode")
     }
 }
@@ -262,7 +325,6 @@ let all_themes = document.querySelector('#temas')
 function change_theme(){
 
     let option_value = all_themes.options[all_themes.selectedIndex].value // seleciona o valor do item que esta selecionado
-    console.log(all_themes.options)
     if (option_value == 'black-theme'){
         html.classList.add("black-theme")
         theme_btn.classList.add("not-click")
@@ -295,12 +357,10 @@ function load_save_theme(){
         option_theme = all_themes.options[all_themes.selectedIndex]
         if (dark_mode_load == "dark-mode-on"){
             dark_menu(ball_position = true)
-            console.log(bubbles_onoff)
         }
     }
 
     if(bubbles_onoff == "on"){
-        console.log("teste")
         off_bubbles(btn_invert = true)
     }
 }
