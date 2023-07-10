@@ -15,6 +15,8 @@
     --special-keys-hover: rgba(255,255,255,0.1);
     --text-color: white;
     --text-key-color: white;
+    font-family: 'Agdasima', sans-serif;
+    font-weight: 700;
 
     /* tema e estilo */
     --calc-display: flex;
@@ -312,4 +314,13 @@ tr td:last-child{
     width: 14px;
     border-radius: 2px;
     color: var(--text-color);
+}
+
+.version{
+    position: absolute;
+    left: 5px;
+    bottom: 10px;
+    color: var(--text-color);
+    font-family: 'Agdasima', sans-serif;
+    font-weight: 700;
 }
