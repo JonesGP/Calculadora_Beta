@@ -23,7 +23,7 @@
         <button class="menu-interface btn-menu" onclick="menu_interface_open()">Menu</button>
         <div class="interface-one interface-one-open">
             <button class="bubbles-btn" onclick="off_bubbles()">Bubbles</button>
-            <button class="theme-btn" onclick="dark_menu()">
+            <button class="theme-btn" onclick="dark_mode()">
                 <span id="ball-theme"></span>
                 <i class="fa-regular fa-sun"></i>
                 <i class="fa-solid fa-moon"></i>
@@ -97,7 +97,43 @@
             </div>
         </div>
     </main>
-    <div class="version">v0.0.5 JonesGP Studio</div>
-    <script src="./assets/js/script.js" defer></script> <!-- esse defer na frente significa que o javascript vai ser baixado junto com a pagina porem só será executado no final dela-->
+    <div class="version">v0.0.6 JonesGP Studio</div>
+    <button class="changelog-btn" onclick="open_changelog()">Changelog</button>
+    <div class="changelog-text">
+        v0.0.6 13.07.2023
+        Added
+        adicionado changelog ao projeto para melhor versionamento do mesmo
+        adicionado um botão para ve o changelog
+        
+        Fixed
+        corrigido bugs com o tema e melhorias de performace
+        
+        v0.0.5
+        added
+        adicionado a aba resultados com todas as operaçoes feita atualmente
+        
+        v0.0.4
+        added
+        adicionado o salvamento das configurações atuais no proprio navegador para quando recarregar a pagina as informaçoes continuem
+        
+        v0.0.3
+        added
+        adicionado novo tema
+        adicionado opçao para poder deligar as bolhas para melhorar a performance
+        adicionado modo escuro
+        
+        v0.0.2
+        added
+        calculo com raiz quadrada, parenteses, porcentagem, pi, elevado
+        melhorias no design
+        
+        v0.0.1
+        adicionado bolhas no fundo
+        
+        v0.0.0
+        versão inicial
+        laçamento da calculadora topper
+    </div>
+    <script src="./assets/js/script.js"></script> <!-- esse defer na frente significa que o javascript vai ser baixado junto com a pagina porem só será executado no final dela-->
 </body>
 </html>

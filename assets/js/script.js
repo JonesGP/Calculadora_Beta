@@ -10,12 +10,12 @@ let results_val = []
 let quant_paren_open = 0
 let quant_paren_closed = 0
 function insert( valor ) {
-    if (valor == '+' || valor == '-' || valor == '÷' || valor == 'x'){
+    if (valor === '+' || valor === '-' || valor === '÷' || valor === 'x'){
         temp += ' ' + valor + ' '
 
-    }else if(valor == '()'){
+    }else if(valor === '()'){
         parentheses()
-    }else if(valor == '√'){
+    }else if(valor === '√'){
         temp += valor
     }else{
         temp += valor
@@ -33,13 +33,13 @@ function igual() {
     if (temp.indexOf('x') != -1){
         temp = temp.replaceAll('x','*')
     }
-    if (temp.indexOf('^') != -1){
+    while (temp.indexOf('^') != -1){
         elevate()
     }
     while(temp.indexOf("√") != -1){
         square_root()
     }
-    if(temp.indexOf('%') != -1){
+    while(temp.indexOf('%') != -1){
         percentage()
     }
     if ((temp.indexOf('(') != -1) || temp.indexOf(')') != -1){
@@ -72,7 +72,7 @@ if(localStorage.hasOwnProperty("resultados-calc")){
 //função para adicionar parenteses
 function parentheses(){
     let space_paren_true = temp.lastIndexOf('(', temp.length)
-    if (temp.indexOf('(') > -1 && (space_paren_true - temp.length) < -1 && quant_paren_open > quant_paren_closed && !(temp.substring(temp.length -1) == ' ')){
+    if (temp.indexOf('(') > -1 && (space_paren_true - temp.length) < -1 && quant_paren_open > quant_paren_closed && !(temp.substring(temp.length -1) === ' ')){
         temp += ' )'
         quant_paren_closed += 1
 
@@ -94,7 +94,7 @@ function calc_parentheses(){
 function square_root(){
     let square_sin_index = temp.indexOf('√') + 1
     let square_value = temp.substring(square_sin_index, temp.indexOf(' ', square_sin_index))
-    if (temp.indexOf(' ', square_sin_index) == -1){
+    if (temp.indexOf(' ', square_sin_index) === -1){
         square_value = temp.substring(square_sin_index, temp.length)
         temp = temp.replace(temp.substring(square_sin_index-1, temp.length), Math.sqrt(square_value))
         return
@@ -134,7 +134,7 @@ function square_root(){
 //     }
 
 
-//     if (prox_value.length == 0 & temp.substring(per_index_final, per_first_space_index +1) != ''){
+//     if (prox_value.length === 0 & temp.substring(per_index_final, per_first_space_index +1) != ''){
 //         console.log(per_value)
 //         per_result = (per_value / 100)
 //         console.log(temp)
@@ -157,12 +157,13 @@ function percentage(){
     let per_first_space_index = temp.lastIndexOf(' ', (temp.lastIndexOf(' ', per_index) - 3))
     console.log(temp.lastIndexOf(' ', per_index))
     let per_full_vals = temp.substring(per_first_space_index + 1, per_index) //valor de todos o conjunto da porcentagem
-    if (per_full_vals.indexOf('√') != -1){
-        per_full_vals = per_full_vals.substring(1, per_full_vals.length)
-    }
-    if (per_full_vals.indexOf('(') != -1){
-        per_full_vals = per_full_vals.substring(1, per_full_vals.length)
-    }
+    console.log(per_full_vals)
+    // if (per_full_vals.indexOf('√') != -1){
+    //     per_full_vals = per_full_vals.substring(1, per_full_vals.length)
+    // }
+    // if (per_full_vals.indexOf('(') != -1){
+    //     per_full_vals = per_full_vals.substring(1, per_full_vals.length)
+    // }
     let per_val = per_full_vals.substring(per_full_vals.length, per_full_vals.lastIndexOf(" ", per_full_vals) + 1) //valor da porcentagem
     let per_prox_val = per_full_vals.substring(-1, per_full_vals.indexOf(' ')) //valor do numero proximo da porcentagem
     let per_sinal = per_full_vals.substring(per_full_vals.indexOf(' '), per_full_vals.lastIndexOf(' ')) //valor do sinal
@@ -213,14 +214,14 @@ function cinstyle() {
     let cal_simple      = document.querySelector('.cal-simple')
     let all_cin_buttons = document.querySelectorAll('[cin-calc]')
 
-    if (cal_simple.style.width == '300px' || cal_simple.style.width == ''){
+    if (cal_simple.style.width === '300px' || cal_simple.style.width === ''){
         cal_simple.style.width = '400px'
     }else{
         cal_simple.style.width = '300px'
     }
 
     all_cin_buttons.forEach(e => {
-        e.style.display = e.style.display == 'table-cell' ? 'none' : 'table-cell'
+        e.style.display = e.style.display === 'table-cell' ? 'none' : 'table-cell'
     })
 
 }
@@ -239,133 +240,162 @@ function del(){
     if(temp.length <= 0){
         return
     }
-    if (temp.substring(temp.length-1) == ')') {
+    if (temp.substring(temp.length-1) === ')') {
         quant_paren_closed -= 1
-    }else if (temp.substring(temp.length-1) == '(') {
+    }else if (temp.substring(temp.length-1) === '(') {
         quant_paren_open -= 1
     }
-    if (temp.substring(temp.length - 1) == ' ') {
+    if (temp.substring(temp.length - 1) === ' ') {
         temp = temp.substring(0, temp.length - 2)
     }else if( result.textContent) {
         let res             = document.getElementById('resultado').innerHTML
         result.innerHTML    = res.substring(0, res.length -1);
         temp                = temp.substring(0, temp.length -1)
     }
-    
 }
-
-
 // Interface
-
 let bubbles_btn = document.querySelector('.bubbles-btn')
 let btn_invert = false
-let btn_interface_mopen = true
+let btn_interface_mopen = false
 let btn_interface_menu = document.querySelector('.interface-one')
 
 function off_bubbles(){
     let bubbles = document.querySelector('.bubbles')
-    if (btn_invert == true) {
-        bubbles.style.display = "flex";
-        btn_invert = !btn_invert
-
-        localStorage.setItem("bubbles", "on")
-    }
-    else{
-        btn_invert = true
-        bubbles.style.display = "none"
-        localStorage.setItem("bubbles", "off")
-        
-    }
+    btn_invert = !btn_invert
+    bubbles.style.display = btn_invert ? "none" : "flex"
+    localStorage.setItem("bubbles", btn_invert ? "off" : "on")
 }
 
-// função para abrir a interface
-function menu_interface_open(){
-    if(btn_interface_mopen == true){
-        btn_interface_menu.style.opacity = "1"
-        btn_interface_menu.classList.add("interface-one-open")
-        btn_interface_mopen = !btn_interface_mopen
-    }
-    else{
-        btn_interface_mopen = true
-        btn_interface_menu.style.opacity = "0"
-        btn_interface_menu.classList.remove("interface-one-open")
-    }
+/**
+ * Toggle the interface menu and update the visibility and opacity of the button.
+ */
+function menu_interface_open() {
+    // Toggle the "interface-one-open" class of btn_interface_menu
+    btn_interface_menu.classList.toggle("interface-one-open");
+    
+    // Update the value of btn_interface_mopen to its opposite
+    btn_interface_mopen = !btn_interface_mopen;
+    
+    // Update the opacity of btn_interface_menu based on btn_interface_mopen
+    btn_interface_menu.style.opacity = btn_interface_mopen ? "1" : "0";
 }
 
 // função para ligar o modo escuro
-let theme_btn = document.querySelector(".theme-btn")
 let ball_theme = document.querySelector("#ball-theme")
 let html = document.querySelector("html")
 let moon = document.querySelector(".fa-moon")
 let sun = document.querySelector(".fa-sun")
-let ball_position = true
-function dark_menu(){
-    if (ball_position == true){
-        ball_theme.style.transform = "translate(10px,-10px)"
-        sun.style.display = "none"
-        moon.style.display = "inline-block"
+let isDarkModeOn = true
+function dark_mode(){
+    ball_theme.style.transform = isDarkModeOn ? "translate(10px,-10px)" : "translate(-10px,-10px)"
+    sun.style.display = isDarkModeOn ? "none" : "inline-block"
+    moon.style.display = isDarkModeOn ? "inline-block" : "none"
+    if(isDarkModeOn){
         html.classList.add("dark-mode")
-        ball_position = false
-
-        localStorage.setItem("dark-mode", "dark-mode-on")
-    }
-    else{
-        ball_position = true
-        sun.style.display = "inline-block"
-        moon.style.display = "none"
-        ball_theme.style.transform = "translate(-10px,-10px)"
+    }else{
         html.classList.remove("dark-mode")
-
-        localStorage.removeItem("dark-mode")
     }
+    localStorage.setItem("dark-mode", isDarkModeOn ? "on" : "off")
+    isDarkModeOn = !isDarkModeOn
 }
 
 // função para mudar o tema
+let theme_btn = document.querySelector(".theme-btn")
 let all_themes = document.querySelector('#temas')
 function change_theme(){
+    const optionValue = all_themes.options[all_themes.selectedIndex].value // seleciona o valor do item que esta selecionado
 
-    let option_value = all_themes.options[all_themes.selectedIndex].value // seleciona o valor do item que esta selecionado
-    if (option_value == 'black-theme'){
+    if (optionValue === 'black-theme'){
         html.classList.add("black-theme")
         theme_btn.classList.add("not-click")
-        dark_menu(ball_position = false)
-        
+        dark_mode(isDarkModeOn = false)  
         localStorage.setItem("current_theme", "black-theme") // salva o valor
-    }
-    if (option_value == 'red-blue-grass'){
+    }else if (optionValue === 'red-blue-grass'){
         html.classList.remove('black-theme')
         theme_btn.classList.remove("not-click")
-
         localStorage.setItem("current_theme", "red-blue-grass")
     }
 }
 
 // salvar no local storage os resultados e temas
-
 let current_theme = localStorage.getItem("current_theme")
 let dark_mode_load = localStorage.getItem('dark-mode')
 let bubbles_onoff = localStorage.getItem("bubbles")
 let option_theme = null
 function load_save_theme(){
-    if (current_theme == "black-theme"){
+    if (current_theme === "black-theme"){
         option_theme = all_themes.options[all_themes.selectedIndex]
         html.classList.add('black-theme')
         theme_btn.classList.add("not-click")
         all_themes.selectedIndex = 1 //muda o selected das options do select
-    }
-    if(current_theme == "red-blue-grass"){
+    }else if(current_theme === "red-blue-grass"){
         option_theme = all_themes.options[all_themes.selectedIndex]
-        if (dark_mode_load == "dark-mode-on"){
-            dark_menu(ball_position = true)
+        if (dark_mode_load == "on"){
+            dark_mode(isDarkModeOn = true)
         }
     }
 
-    if(bubbles_onoff == "on"){
+    if(bubbles_onoff === "on"){
         off_bubbles(btn_invert = true)
-    }
-    else if(bubbles_onoff == "off"){
+    }else if(bubbles_onoff === "off"){
         off_bubbles(btn_invert = false)
     }
 }
 load_save_theme()
 
+function open_changelog(){
+    let changelog = document.querySelector('.changelog-text')
+    changelog.style.display = changelog.style.display === 'none' ? 'flex' : 'none'
+}
+let changelog_versions = [
+    {
+        version: "v0.0.6 13.07.2023",
+        added: [
+            "adicionado changelog ao projeto para melhor versionamento do mesmo",
+            "adicionado um botão para ver o changelog"
+        ],
+        fixed: [
+            "corrigido bugs com o tema e melhorias de performance"
+        ]
+    },
+    {
+        version: "v0.0.5",
+        added: [
+            "adicionado a aba resultados com todas as operações feitas atualmente"
+        ]
+    },
+    {
+        version: "v0.0.4",
+        added: [
+            "adicionado o salvamento das configurações atuais no próprio navegador para quando recarregar a página as informações continuem"
+        ]
+    },
+    {
+        version: "v0.0.3",
+        added: [
+            "adicionado novo tema",
+            "adicionado opção para poder desligar as bolhas para melhorar a performance",
+            "adicionado modo escuro"
+        ]
+    },
+    {
+        version: "v0.0.2",
+        added: [
+            "cálculo com raiz quadrada, parênteses, porcentagem, pi, elevado",
+            "melhorias no design"
+        ]
+    },
+    {
+        version: "v0.0.1",
+        added: [
+            "adicionado bolhas no fundo"
+        ]
+    },
+    {
+        version: "v0.0.0",
+        added: [
+            "versão inicial",
+            "lançamento da calculadora topper"
+        ]
+    }
+];
