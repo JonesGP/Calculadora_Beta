@@ -317,6 +317,37 @@ function change_theme(){
     }
 }
 
+let ballon_text_container = document.querySelector(".ballon-text-conteiner")
+let ballon_text = document.querySelector(".ballon-text")
+let tutorial_position = 0
+function start_tutorial(){
+    if (tutorial_position === 0){
+        ballon_text_container.style.display = 'flex'
+    }
+    if (tutorial_position === 9){
+        skip_tutorial()
+    }
+    ballon_text_container.style.transform = texts_tutorial[tutorial_position].position
+    ballon_text_container.style.top = texts_tutorial[tutorial_position].top
+    ballon_text_container.style.left = texts_tutorial[tutorial_position].left
+    ballon_text.innerHTML = texts_tutorial[tutorial_position].text
+    if (tutorial_position === 2){
+        menu_interface_open()
+    }
+    if (tutorial_position === 6){
+        menu_interface_open()
+    }
+}
+function continue_tutorial(){
+    tutorial_position += 1
+    start_tutorial()
+}
+function skip_tutorial(){
+    console.log('teste')
+    ballon_text_container.style.display = 'none'
+    tutorial_position = 0
+}
+
 // salvar no local storage os resultados e temas
 let current_theme = localStorage.getItem("current_theme")
 let dark_mode_load = localStorage.getItem('dark-mode')
@@ -345,7 +376,7 @@ load_save_theme()
 
 function open_changelog(){
     let changelog = document.querySelector('.changelog-text')
-    changelog.style.display = changelog.style.display === 'none' ? 'flex' : 'none'
+    changelog.style.display = changelog.style.display === 'flex' ? 'none' : 'flex'
 }
 let changelog_versions = [
     {
@@ -399,3 +430,61 @@ let changelog_versions = [
         ]
     }
 ];
+
+let texts_tutorial = [
+    {
+        top: '50%',
+        left: '50%',
+        position: 'translate(-150px, -400px)',
+        text: 'Seja bem vindo a minha humilde calculadora, se quiser um tutorial de como funciona as coisa por aqui, clique no botão continuar, se não clique em pular.'
+    },
+    {
+        top: '80px',
+        left: '30px',
+        position: '',
+        text: 'Aqui é o menu, nele voce pode ativar e desativar as bolhas, a opção de modo escuro, e poder mudar o tema!'
+    },
+    {
+        top: '100px',
+        left: '40px',
+        position: '',
+        text: 'O botão bolhas, se ativado, irá mostrar o fundo com as bolhas com animação de reflexos, porém esse recurso consome muito processador.'
+    },
+    {
+        top: '100px',
+        left: '100px',
+        position: '',
+        text: 'O segundo botão ativa o modo escuro.'
+    },
+    {
+        top: '100px',
+        left: '150px',
+        position: '',
+        text: 'O terceiro abre uma lista com os temas para voce escolher.'
+    },
+    {
+        top: '100px',
+        left: '310px',
+        position: '',
+        text: 'O quarto abre o tutorial novamente.'
+    },
+    {
+        top: '50%',
+        left: '50%',
+        position: 'translate(-150px, 300px)',
+        text: 'Aqui nesta seçao ficaram armazenados todos os resultados que voce fez com as operações.'
+    },
+    {
+        top: '50%',
+        left: '50%',
+        position: 'translate(-150px, -370px)',
+        text: 'Aqui é a nossa calculadora que foi feita com o objetivo de melhorar a sua experiência e torna os calculos mais divertidos.'
+    },
+    {
+        top: '82vh',
+        left: '100px',
+        position: '',
+        text: 'E por ultimo, aqui você pode ver o changelog do projeto, com todas as alterações feitas.'
+    }
+]
+start_tutorial()
