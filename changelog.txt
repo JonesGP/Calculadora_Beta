@@ -1,35 +1,46 @@
+v0.0.8 16.07.2023
+Added
+varios idiomas agora são suportados
+melhorias no design, animações e posicionamento de items.
+
+Fixed
+click em itens mesmo estando ocultos
+
+v0.0.7 14.07.2023
+Added
+Tutorial para explicação de como a interface funciona
+Botão para iniciar o tutorial
+
 v0.0.6 13.07.2023
 Added
 adicionado changelog ao projeto para melhor versionamento do mesmo
 adicionado um botão para ve o changelog
-
+        
 Fixed
 corrigido bugs com o tema e melhorias de performace
-
+        
 v0.0.5
 added
 adicionado a aba resultados com todas as operaçoes feita atualmente
-
+        
 v0.0.4
 added
 adicionado o salvamento das configurações atuais no proprio navegador para quando recarregar a pagina as informaçoes continuem
-
+        
 v0.0.3
 added
 adicionado novo tema
 adicionado opçao para poder deligar as bolhas para melhorar a performance
 adicionado modo escuro
-
+        
 v0.0.2
 added
 calculo com raiz quadrada, parenteses, porcentagem, pi, elevado
 melhorias no design
-
+        
 v0.0.1
 adicionado bolhas no fundo
-
+        
 v0.0.0
 versão inicial
 laçamento da calculadora topper
-
-

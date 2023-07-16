@@ -29,10 +29,21 @@
                 <i class="fa-solid fa-moon"></i>
             </button>
             <select name="temas" onchange="change_theme()" id="temas">
-                <option selected value="red-blue-grass">Vermelho azul vidro</option>
-                <option value="black-theme">Preto negrito</option>
+                <option selected value="red-blue-grass"id="red-blue-grass">Vermelho azul vidro</option>
+                <option value="black-theme" id="black-theme">Preto negrito</option>
             </select>
-            <button class="tutorial-start-btn" onclick="start_tutorial()">Tutorial</button>
+            <button class="tutorial-start-btn" onclick="start_tutorial(tutorial_position = 0), menu_interface_open()">Tutorial</button>
+            <select name="languages-user" onchange="change_langue(this.value), location.reload()" id="languages">
+                <option value="pt-BR">Português</option>
+                <option value="en-US">English</option>
+                <option value="es-ES">Español</option>
+                <option value="it-IT">Italiano</option>
+                <option value="fr-FR">Français</option>
+                <option value="nl-NL">Nederlands</option>
+                <option value="pl-PL">Polski</option>
+                <option value="de-DE">Deutsch</option>
+                <option value="ru-RU">Русский</option>
+            </select>
         </div>
         
     </div>
@@ -92,18 +103,30 @@
         </div>
         <div class="results-container">
             <div class="results">
-                Resultados
-                <button class="clear-btn" onclick="clear_results_list()">Clear</button>
+                <div class="results-menu-container">
+                    <div class="results-menu">Resultados</div> 
+                    <button class="clear-btn" onclick="clear_results_list()">Clear</button>
+                </div>
+                
                 <div class="val-results"></div>
             </div>
         </div>
     </main>
     <div class="version">v0.0.7 JonesGP Studio</div>
     <button class="changelog-btn" onclick="open_changelog()">Changelog</button>
-    <div class="changelog-text">v0.0.7 14.07.2023
+    <div class="changelog-text">v0.0.8 16.07.2023
+Added
+varios idiomas agora são suportados
+melhorias no design, animações e posicionamento de items.
+        
+Fixed
+click em itens mesmo estando ocultos
+
+v0.0.7 14.07.2023
 Added
 Tutorial para explicação de como a interface funciona
 Botão para iniciar o tutorial
+
 v0.0.6 13.07.2023
 Added
 adicionado changelog ao projeto para melhor versionamento do mesmo
@@ -146,7 +169,8 @@ laçamento da calculadora topper
             <button class="ballon-text-btn-continue" onclick="continue_tutorial()">Continuar</button>
         </div>
     </div>
-    <script src="./assets/js/script.js"></script> <!-- esse defer na frente significa que o javascript vai ser baixado junto com a pagina porem só será executado no final dela-->
-    <script src="./assets/js/simple_functions.js"></script>
+    <script src="./assets/js/langs.js" async></script>
+    <script src="./assets/js/script.js" async></script> <!-- esse defer na frente significa que o javascript vai ser baixado junto com a pagina porem só será executado no final dela-->
+    <script src="./assets/js/simple_functions.js" async></script>
 </body>
 </html>

@@ -253,6 +253,7 @@ function del(){
         temp                = temp.substring(0, temp.length -1)
     }
 }
+
 // Interface
 let bubbles_btn = document.querySelector('.bubbles-btn')
 let btn_invert = false
@@ -319,13 +320,17 @@ function change_theme(){
 
 let ballon_text_container = document.querySelector(".ballon-text-conteiner")
 let ballon_text = document.querySelector(".ballon-text")
+let ballon_text_btn_skip = document.querySelector(".ballon-text-btn-skip")
+let ballon_text_btn_continue = document.querySelector(".ballon-text-btn-continue")
 let tutorial_position = 0
 function start_tutorial(){
     if (tutorial_position === 0){
         ballon_text_container.style.display = 'flex'
     }
-    if (tutorial_position === 9){
+    ballon_text_btn_continue.style.display = tutorial_position === 9 ? 'none' : 'inline-block'
+    if (tutorial_position === 10){
         skip_tutorial()
+
     }
     ballon_text_container.style.transform = texts_tutorial[tutorial_position].position
     ballon_text_container.style.top = texts_tutorial[tutorial_position].top
@@ -334,7 +339,7 @@ function start_tutorial(){
     if (tutorial_position === 2){
         menu_interface_open()
     }
-    if (tutorial_position === 6){
+    else if (tutorial_position === 7){
         menu_interface_open()
     }
 }
@@ -378,113 +383,68 @@ function open_changelog(){
     let changelog = document.querySelector('.changelog-text')
     changelog.style.display = changelog.style.display === 'flex' ? 'none' : 'flex'
 }
-let changelog_versions = [
-    {
-        version: "v0.0.6 13.07.2023",
-        added: [
-            "adicionado changelog ao projeto para melhor versionamento do mesmo",
-            "adicionado um botão para ver o changelog"
-        ],
-        fixed: [
-            "corrigido bugs com o tema e melhorias de performance"
-        ]
-    },
-    {
-        version: "v0.0.5",
-        added: [
-            "adicionado a aba resultados com todas as operações feitas atualmente"
-        ]
-    },
-    {
-        version: "v0.0.4",
-        added: [
-            "adicionado o salvamento das configurações atuais no próprio navegador para quando recarregar a página as informações continuem"
-        ]
-    },
-    {
-        version: "v0.0.3",
-        added: [
-            "adicionado novo tema",
-            "adicionado opção para poder desligar as bolhas para melhorar a performance",
-            "adicionado modo escuro"
-        ]
-    },
-    {
-        version: "v0.0.2",
-        added: [
-            "cálculo com raiz quadrada, parênteses, porcentagem, pi, elevado",
-            "melhorias no design"
-        ]
-    },
-    {
-        version: "v0.0.1",
-        added: [
-            "adicionado bolhas no fundo"
-        ]
-    },
-    {
-        version: "v0.0.0",
-        added: [
-            "versão inicial",
-            "lançamento da calculadora topper"
-        ]
+let lang_index = 0
+function change_langue(language){
+    let now_language = ''
+    if (language === "pt-BR"){
+        now_language = texts_tutorial
+        lang_index = 0
+    }else if (language === "en-US"){
+        now_language = texts_tutorial_en
+        lang_index = 1
+    }else if (language === "es-ES"){
+        now_language = texts_tutorial_es
+        lang_index = 2
+    }else if (language == "it-IT"){
+        now_language = texts_tutorial_it
+        lang_index = 3
+    }else if (language === "fr-FR"){
+        now_language = texts_tutorial_fr
+        lang_index = 4
+    }else if (language === "nl-NL"){
+        now_language = texts_tutorial_nl
+        lang_index = 5
+    }else if (language === "pl-PL"){
+        now_language = texts_tutorial_pl
+        lang_index = 6
+    }else if (language === "de-DE"){
+        now_language = texts_tutorial_de
+        lang_index = 7
+    }else if(language === "ru-RU"){
+        now_language = texts_tutorial_ru
+        lang_index = 8
     }
-];
 
-let texts_tutorial = [
-    {
-        top: '50%',
-        left: '50%',
-        position: 'translate(-150px, -400px)',
-        text: 'Seja bem vindo a minha humilde calculadora, se quiser um tutorial de como funciona as coisa por aqui, clique no botão continuar, se não clique em pular.'
-    },
-    {
-        top: '80px',
-        left: '30px',
-        position: '',
-        text: 'Aqui é o menu, nele voce pode ativar e desativar as bolhas, a opção de modo escuro, e poder mudar o tema!'
-    },
-    {
-        top: '100px',
-        left: '40px',
-        position: '',
-        text: 'O botão bolhas, se ativado, irá mostrar o fundo com as bolhas com animação de reflexos, porém esse recurso consome muito processador.'
-    },
-    {
-        top: '100px',
-        left: '100px',
-        position: '',
-        text: 'O segundo botão ativa o modo escuro.'
-    },
-    {
-        top: '100px',
-        left: '150px',
-        position: '',
-        text: 'O terceiro abre uma lista com os temas para voce escolher.'
-    },
-    {
-        top: '100px',
-        left: '310px',
-        position: '',
-        text: 'O quarto abre o tutorial novamente.'
-    },
-    {
-        top: '50%',
-        left: '50%',
-        position: 'translate(-150px, 300px)',
-        text: 'Aqui nesta seçao ficaram armazenados todos os resultados que voce fez com as operações.'
-    },
-    {
-        top: '50%',
-        left: '50%',
-        position: 'translate(-150px, -370px)',
-        text: 'Aqui é a nossa calculadora que foi feita com o objetivo de melhorar a sua experiência e torna os calculos mais divertidos.'
-    },
-    {
-        top: '82vh',
-        left: '100px',
-        position: '',
-        text: 'E por ultimo, aqui você pode ver o changelog do projeto, com todas as alterações feitas.'
+    for(let i = 0; i < texts_tutorial.length; i++){
+        texts_tutorial[i].text = now_language[i].text
     }
+    localStorage.setItem('language', language)
+}
+let now_save_lang = localStorage.getItem('language')
+if (now_save_lang === null){
+    now_save_lang = 'pt-BR'
+}
+let languages = document.getElementById('languages')
+
+change_langue(now_save_lang)
+if (now_save_lang != null){
+    languages.selectedIndex = lang_index
+}
+
+let list_texts_items = [
+    document.querySelector('title'),
+    document.querySelector('.btn-menu'),
+    document.querySelector('.bubbles-btn'),
+    document.querySelector('#red-blue-grass'),
+    document.querySelector('#black-theme'),
+    document.querySelector('.tutorial-start-btn'),
+    document.querySelector('.results-menu'),
+    document.querySelector('.clear-btn'),
+    document.querySelector('.changelog-btn'),
 ]
+for(let i = 0; i < list_texts_items.length; i++){
+    list_texts_items[i].innerHTML = worlds_texts[lang_index][i]
+}
+console.log(list_texts_items)
+// title_txt.innerHTML = worlds_en[0]
 start_tutorial()

@@ -17,6 +17,7 @@
     --text-key-color: white;
     font-family: 'Agdasima', sans-serif;
     font-weight: 700;
+    user-select: none;
 
     /* tema e estilo */
     --calc-display: flex;
@@ -44,8 +45,8 @@
     --ac-hover-key: rgba(0,0,0,0.1);
     --special-keys-background-color:transparent;
     --special-keys-hover: rgba(0,0,0,0.1);
-    --text-color: black;
-    --text-key-color: black;
+    --text-color: white;
+    --text-key-color: white;
 }
 
 .black-theme:root{
@@ -121,6 +122,7 @@ body {
 .interface-one-open{
     transform: translate(20px, 10px);
     opacity: 0;
+    transform: translate(20px, -100px);
 
 }
 
@@ -173,8 +175,7 @@ body {
     display: flex;
     flex-direction: column;
     padding: 10px;
-    max-width: 300px;
-    min-height: 90px;
+    width: 300px;
     max-height: 600px;
     background-color: var(--calc-background-color);
     border-left: 1px solid rgba(255,255,255,0.5);
@@ -192,7 +193,6 @@ body {
     text-align: justify;
     text-indent: 10px;
     overflow-y: auto;
-    padding-right: 10px;
 }
 .buttons-contskip{
     display: flex;
@@ -203,12 +203,19 @@ body {
 }
 
 
-#temas{
-    background-color: rgba(0,0,0,0.1);
-    color: white;
+#temas, #languages{
+    background-color: var(--calc-background-color);
+    color: var(--text-color);
     font-size: 15px;
     border: none;
+    border-left: 1px solid rgba(255,255,255,0.5);
+    border-top: 1px solid rgba(255,255,255,0.5);
     border-radius: 3px;
+    transition: 1s;
+}
+#temas option, #languages option{
+    background-color: rgba(0,0,0,0.8);
+    border: 1px solid rgba(255,255,255,0.5);
 }
 
 /* CALCULATOR */
@@ -329,6 +336,7 @@ tr td:last-child{
 /* resultados */
 .results-container{
     position: absolute;
+    align-items: center;
     top: 460px;
     background-color: var(--calc-background-color);
     border-radius: var(--calc-border-radius);
@@ -340,6 +348,22 @@ tr td:last-child{
     backdrop-filter: var(--calc-backdrop-filter);
     box-shadow: var(--calc-box-shadow);
     color: var(--text-color);
+}
+.results-menu{
+
+}
+.results-menu-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 100%;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+.clear-btn{
+    position: absolute;
+    right: 20px;
 }
 .btn-results{
     position: absolute;
