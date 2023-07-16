@@ -441,6 +441,8 @@ let list_texts_items = [
     document.querySelector('.results-menu'),
     document.querySelector('.clear-btn'),
     document.querySelector('.changelog-btn'),
+    document.querySelector('.ballon-text-btn-skip'),
+    document.querySelector('.ballon-text-btn-continue'),
 ]
 for(let i = 0; i < list_texts_items.length; i++){
     list_texts_items[i].innerHTML = worlds_texts[lang_index][i]

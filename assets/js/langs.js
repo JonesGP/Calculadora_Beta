@@ -371,31 +371,31 @@ let texts_tutorial_ru = [
 ];
 
 let worlds_pt = [
-    'Calculadora', 'Menu', 'Bolhas', 'Vermelhor azul', 'Preto', 'Tutorial', 'Resultados', 'Limpar', 'Log de alterações'
+    'Calculadora', 'Menu', 'Bolhas', 'Vermelhor azul', 'Preto', 'Tutorial', 'Resultados', 'Limpar', 'Log de alterações', 'pular', 'continuar'
 ]
 let worlds_en = [
-    'Calculator', 'Menu', 'Bubbles', 'Dark blue', 'White', 'Tutorial', 'Results', 'Clear', 'Log of changes'
+    'Calculator', 'Menu', 'Bubbles', 'Dark blue', 'White', 'Tutorial', 'Results', 'Clear', 'Log of changes', 'skip', 'continue'
 ]
 let worlds_es = [
-    'Calculadora', 'Menu', 'Bolitas', 'Azul oscuro', 'Blanco', 'Tutorial', 'Resultados', 'Limpiar', 'Registro de cambios'
+    'Calculadora', 'Menu', 'Bolitas', 'Azul oscuro', 'Blanco', 'Tutorial', 'Resultados', 'Limpiar', 'Registro de cambios', 'Saltar', 'Continuar'
 ]
 let worlds_it = [
-    'Calcolatrice', 'Menu', 'Bollini', 'Modo scuro', 'Bianco', 'Tutorial', 'Risultati', 'Cancella', 'Registro di cambiamenti'
+    'Calcolatrice', 'Menu', 'Bollini', 'Modo scuro', 'Bianco', 'Tutorial', 'Risultati', 'Cancella', 'Registro di cambiamenti', 'Salta', 'Continua'
 ]
 let worlds_fr = [
-    'Calculatrice', 'Menu', 'Bulles', 'Mode sombre', 'Bleu', 'Tutorial', 'Résultats', 'Effacer', 'Journal des modifications'
+    'Calculatrice', 'Menu', 'Bulles', 'Mode sombre', 'Bleu', 'Tutorial', 'Résultats', 'Effacer', 'Journal des modifications', 'Passer', 'Continuer'
 ]
 let worlds_nl = [
-    'Calculator', 'Menu', 'Bollen', 'Dunkelblau', 'Wit', 'Tutorial', 'Resultaten', 'Wijzigen', 'Logboek'
+    'Calculator', 'Menu', 'Bollen', 'Dunkelblau', 'Wit', 'Tutorial', 'Resultaten', 'Wijzigen', 'Logboek', 'Terug', 'Doorgaan'
 ]
 let worlds_pl = [
-    'Kalkulator', 'Menu', 'Błaski', 'Tryb ciemny', 'Białe', 'Tutorial', 'Rzeczy', 'Wyczyść', 'Log'
+    'Kalkulator', 'Menu', 'Błaski', 'Tryb ciemny', 'Białe', 'Tutorial', 'Rzeczy', 'Wyczyść', 'Log', 'Powrót', 'Kontynuuj'
 ]
 let worlds_de = [
-    'Kalkulator', 'Menu', 'Blätter', 'Dunkel dunkelblau', 'Weiß', 'Tutorial', 'Ergebnisse', 'Löschen', 'Log'
+    'Kalkulator', 'Menu', 'Blätter', 'Dunkel dunkelblau', 'Weiß', 'Tutorial', 'Ergebnisse', 'Löschen', 'Log', 'Zurück', 'Fortfahren'
 ]
 let worlds_ru = [
-    'Калькулятор', 'Меню', 'Бласки', 'Темная тема', 'Белый', 'Туториал', 'Результаты', 'Очистить', 'Журнал'
+    'Калькулятор', 'Меню', 'Бласки', 'Темная тема', 'Белый', 'Туториал', 'Результаты', 'Очистить', 'Журнал', 'Пропустить', 'Продолжить'
 ]
 let worlds_texts = [
     worlds_pt, worlds_en, worlds_es, worlds_it, worlds_fr, worlds_nl, worlds_pl, worlds_de, worlds_ru
